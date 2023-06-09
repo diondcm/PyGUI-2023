@@ -1,0 +1,118 @@
+object frmPyIntegration: TfrmPyIntegration
+  Left = 0
+  Top = 0
+  Caption = 'Python Integration'
+  ClientHeight = 580
+  ClientWidth = 756
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object LayoutControls: TLayout
+    Align = MostBottom
+    Position.Y = 530.000000000000000000
+    Size.Width = 756.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object ButtonBack: TButton
+      Align = MostRight
+      Position.X = 676.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Back'
+    end
+    object ButtonRequest: TButton
+      Align = MostLeft
+      Size.Width = 129.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Request to ChatGPT'
+      OnClick = ButtonRequestClick
+    end
+  end
+  object LayoutOutput: TLayout
+    Align = Bottom
+    Position.Y = 324.000000000000000000
+    Size.Width = 756.000000000000000000
+    Size.Height = 206.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object MemoOut: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      Align = Client
+      Size.Width = 756.000000000000000000
+      Size.Height = 206.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Viewport.Width = 752.000000000000000000
+      Viewport.Height = 202.000000000000000000
+    end
+  end
+  object MemoIn: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Lines.Strings = (
+      'import openai'
+      ''
+      '# Set up your OpenAI API key'
+      'openai.api_key = "#API-SECRET-KEY#"'
+      ''
+      'def chat_with_gpt(prompt):'
+      '    response = openai.Completion.create('
+      
+        '        engine='#39'text-davinci-003'#39',  # You can change the engine ' +
+        'if needed'
+      '        prompt=prompt,'
+      
+        '        max_tokens=50,  # Adjust the length of the response as d' +
+        'esired'
+      
+        '        temperature=0.7,  # Controls the randomness of the respo' +
+        'nse. Lower values make it more focused.'
+      '        n=1,  # Number of responses to generate'
+      '        stop=None,  # Specify a custom stop sequence if needed'
+      '        timeout=15  # Timeout in seconds'
+      '    )'
+      ''
+      '    if '#39'choices'#39' in response and len(response.choices) > 0:'
+      '        return response.choices[0].text.strip()'
+      '    else:'
+      '        return None'
+      ''
+      '# Example usage'
+      
+        'response = chat_with_gpt("Short exercice description for people ' +
+        'starting academy in one line")'
+      'if response:'
+      '    print('#39'ChatGPT:'#39', response)'
+      'else:'
+      '    print('#39'An error occurred.'#39')')
+    Align = Client
+    Size.Width = 756.000000000000000000
+    Size.Height = 324.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Viewport.Width = 736.000000000000000000
+    Viewport.Height = 320.000000000000000000
+  end
+  object PythonEngine: TPythonEngine
+    IO = PythonInputOutput
+    Left = 652
+    Top = 248
+  end
+  object PythonInputOutput: TPythonInputOutput
+    OnSendUniData = PythonInputOutputSendUniData
+    UnicodeIO = True
+    RawOutput = True
+    Left = 508
+    Top = 248
+  end
+end
