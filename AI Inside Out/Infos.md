@@ -2,6 +2,8 @@ AI Inside Out
 
 Extensions used in this session:
 
+https://github.com/features/copilot
+
 VS Code:
 AWS Toolkit for Visual Studio Code
 https://aws.amazon.com/visualstudiocode/
